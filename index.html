@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glade S.O.S | Smart Odor Solution</title>
+    <meta name="description" content="La IA de Glade que entiende tu casa y te ayuda a combatir los olores con hacks inteligentes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="glade-logo">GLADE</div>
+            <div class="menu-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </div>
+        </header>
+
+        <main id="app">
+            <section class="hero">
+                <h1>GLADE <span class="sos">S.O.S</span></h1>
+                <p>Escanea tu espacio. Detecta el origen. Recupera la frescura.</p>
+                <button id="btn-demo" class="btn-secondary" style="background: transparent; border: 1px solid var(--glade-yellow); color: var(--glade-yellow); padding: 8px 16px; border-radius: 100px; margin-top: 1rem; font-size: 0.7rem; cursor: pointer;">PROBAR DEMO</button>
+            </section>
+
+            <section class="scan-area">
+                <div class="scan-container" id="drop-zone">
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    <div class="scan-placeholder" id="placeholder">
+                        <div class="icon-circle pulse">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </div>
+                        <span>Subir foto o Capturar</span>
+                    </div>
+                    
+                    <img id="image-preview" alt="Preview">
+
+                    <div class="scanning-hud" id="hud">
+                        <div class="scan-line"></div>
+                        <!-- Markers will be injected here -->
+                        <div class="marker" id="marker-1" style="top: 30%; left: 20%;">
+                            <span class="marker-label">UPGLADE DETECTED</span>
+                            <span class="marker-value">Olor animal [Alta Intensidad]</span>
+                        </div>
+                        <div class="marker" id="marker-2" style="top: 60%; left: 50%;">
+                            <span class="marker-label">UPGLADE DETECTED</span>
+                            <span class="marker-value">Humedad en sillón</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results">
+                <div class="hack-card">
+                    <div class="coupon-badge">HACK DEL DÍA</div>
+                    <h3>SOLUCIÓN PARA EL SILLÓN</h3>
+                    <p>Espolvoreá un poco de bicarbonato, dejá actuar 15 min y aspirá. Luego, aplicá Glade Aerosol para sellar la frescura.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-recommendation">
+                        <img src="" id="rec-product-img" class="product-img" alt="Glade Product">
+                        <div class="product-info">
+                            <h4>Glade Aerosol</h4>
+                            <p>Lavanda y Vainilla</p>
+                            <div class="coupon-badge" style="margin-top: 5px;">-20% CON "GLADESOS"</div>
+                        </div>
+                    </div>
+                    <a href="https://www.mercadolibre.com.ar/l/glade" target="_blank" class="btn-buy">
+                        COMPRAR EN MERCADO LIBRE
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer style="margin-top: auto; padding: 2rem 0; text-align: center; font-size: 0.7rem; color: var(--text-dim);">
+            © 2026 TRÓPICA - MERCADO ADS | GLADE®
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
