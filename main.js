@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDemo = false;
 
     // Set initial product image
-    recProductImg.src = 'products.png';
+    recProductImg.src = 'Prodcutos.png';
 
     btnDemo.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevent triggering dropZone click
