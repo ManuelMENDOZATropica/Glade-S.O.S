@@ -9,6 +9,7 @@
   --glass-border: rgba(0, 0, 0, 0.08);
   --accent-gradient: linear-gradient(135deg, var(--glade-yellow), #f5a623);
   --font-main: 'Outfit', 'Inter', sans-serif;
+  --ml-yellow: #FFF159;
 }
 
 * {
@@ -36,7 +37,8 @@ h1, h2, h3 {
 .glade-logo {
   font-weight: 900;
   font-size: 1.5rem;
-  color: var(--glade-yellow);
+  color: var(--glade-yellow-bright);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 /* Layout */
@@ -54,7 +56,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero {
@@ -63,21 +65,40 @@ header {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1;
   margin-bottom: 0.5rem;
 }
 
 .hero .sos {
-  color: var(--glade-yellow);
+  color: var(--glade-yellow-bright);
   display: block;
 }
 
 .hero p {
   color: var(--text-dim);
-  font-size: 0.9rem;
-  max-width: 80%;
-  margin: 0 auto;
+  font-size: 0.95rem;
+  max-width: 90%;
+  margin: 0.5rem auto 1rem auto;
+  line-height: 1.4;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--text-light);
+  color: var(--text-light);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+}
+
+.btn-secondary:hover {
+  background: var(--text-light);
+  color: var(--bg-dark);
 }
 
 /* Main UI Components */
@@ -89,7 +110,7 @@ header {
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,6 +123,7 @@ header {
   align-items: center;
   gap: 1rem;
   transition: transform 0.3s ease;
+  z-index: 10;
 }
 
 .scan-container:hover .scan-placeholder {
@@ -116,13 +138,47 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(248, 231, 28, 0.3);
+  box-shadow: 0 0 30px rgba(248, 231, 28, 0.4);
 }
 
 .icon-circle svg {
   width: 32px;
   height: 32px;
-  color: var(--bg-dark);
+  color: #000;
+}
+
+/* Image Handling & Transitions */
+.image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.preview-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+}
+
+.white-version {
+  opacity: 0;
+}
+
+.white-version.active {
+  opacity: 1;
+  display: block;
+}
+
+.white-aesthetic {
+  filter: grayscale(1) brightness(1.6) contrast(0.85) sepia(0.05);
 }
 
 /* Scanning Overlay */
@@ -135,6 +191,7 @@ header {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
+  z-index: 5;
 }
 
 .scanning-hud.active {
@@ -146,9 +203,9 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: var(--glade-yellow);
-  box-shadow: 0 0 15px var(--glade-yellow);
+  height: 3px;
+  background: var(--glade-yellow-bright);
+  box-shadow: 0 0 15px var(--glade-yellow-bright);
   animation: scanMove 3s infinite linear;
 }
 
@@ -159,114 +216,146 @@ header {
 
 .marker {
   position: absolute;
-  width: 120px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border-left: 2px solid var(--glade-yellow);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 130px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border-left: 3px solid var(--glade-yellow-bright);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   backdrop-filter: blur(5px);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
+  border-radius: 0 8px 8px 0;
   transform: scale(0);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .marker.show {
   transform: scale(1);
 }
 
+.marker::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--glade-yellow-bright);
+  border-radius: 50%;
+}
+
 .marker-label {
-  color: var(--glade-yellow);
-  font-weight: bold;
+  color: #888;
+  font-weight: 800;
   display: block;
   margin-bottom: 2px;
+  letter-spacing: 0.5px;
 }
 
 .marker-value {
-  color: white;
+  color: #000;
+  font-weight: 700;
 }
 
 /* Results Section */
 #results {
   display: none;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   animation: fadeInUp 0.8s ease forwards;
 }
 
 .hack-card {
-  background: var(--glass-bg);
+  background: var(--bg-darker);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.02);
 }
 
 .hack-card h3 {
-  font-size: 0.8rem;
-  color: var(--glade-yellow);
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #000;
+  margin-bottom: 0.75rem;
 }
 
 .hack-card p {
-  font-size: 1.1rem;
-  line-height: 1.4;
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
 }
 
 .product-recommendation {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  background: #f4f4f4;
-  color: black;
-  border-radius: 16px;
-  padding: 1rem;
+  background: var(--bg-darker);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .product-img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .product-info h4 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .product-info p {
-  font-size: 0.8rem;
-  color: #666;
-  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
 }
 
-.btn-buy {
-  display: block;
+/* Mercado Libre Coupon Button */
+.btn-buy-ml {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
-  background: #00BCFF; /* Mercado Libre Blue */
-  color: white;
+  background: var(--ml-yellow);
+  color: #2D3277; /* ML dark blue text */
   text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: 1.1rem;
+  border-radius: 16px;
   text-decoration: none;
-  font-weight: bold;
-  margin-top: 1rem;
-  transition: transform 0.2s ease;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(255, 241, 89, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-buy:hover {
+.btn-buy-ml:hover {
   transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 241, 89, 0.4);
+}
+
+.ml-logo {
+  width: 24px;
+  height: 24px;
 }
 
 .coupon-badge {
   display: inline-block;
-  background: var(--glade-yellow);
+  background: var(--glade-yellow-bright);
   color: black;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 100px;
   font-size: 0.7rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
 }
 
 /* Animations */
@@ -281,14 +370,7 @@ header {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0.4); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0.5); }
   70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(248, 231, 28, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0); }
-}
-
-#image-preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
 }

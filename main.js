@@ -3,19 +3,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     const placeholder = document.getElementById('placeholder');
     const preview = document.getElementById('image-preview');
+    const previewWhite = document.getElementById('image-preview-white');
     const hud = document.getElementById('hud');
     const results = document.getElementById('results');
     const recProductImg = document.getElementById('rec-product-img');
     const markers = document.querySelectorAll('.marker');
     const btnDemo = document.getElementById('btn-demo');
 
-    // Set initial product image
-    recProductImg.src = 'product.png';
+    let isDemo = false;
 
-    btnDemo.addEventListener('click', () => {
+    // Set initial product image
+    recProductImg.src = 'products.png';
+
+    btnDemo.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering dropZone click
+        isDemo = true;
+        
         placeholder.style.display = 'none';
+        
         preview.src = 'room.png';
         preview.style.display = 'block';
+        preview.style.opacity = '1';
+        
+        previewWhite.src = 'room_white.png';
+        previewWhite.classList.remove('white-aesthetic'); // Demo has its own white render
+        previewWhite.style.display = 'block';
+        previewWhite.classList.remove('active');
+        
         startScanning();
     });
 
@@ -24,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
+            isDemo = false;
             handleImage(file);
         }
     });
@@ -31,10 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleImage(file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            // Hide placeholder and show preview
             placeholder.style.display = 'none';
+            
+            // Set original preview
             preview.src = e.target.result;
             preview.style.display = 'block';
+            preview.style.opacity = '1';
+            
+            // Set white preview with CSS filter
+            previewWhite.src = e.target.result;
+            previewWhite.classList.add('white-aesthetic');
+            previewWhite.style.display = 'block';
+            previewWhite.classList.remove('active');
             
             startScanning();
         };
@@ -57,14 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('marker-2').classList.add('show');
         }, 3000);
 
-        // Show results after scanning
+        // Show results after scanning and convert to white aesthetic
         setTimeout(() => {
             hud.classList.remove('active');
+            
+            // Fade in the white aesthetic version
+            previewWhite.classList.add('active');
+            
+            // Show result cards
             results.style.display = 'block';
             results.scrollIntoView({ behavior: 'smooth' });
-            
-            // Add a subtle success pulse to the product card
-            document.querySelector('.product-card').classList.add('fadeInUp');
         }, 5000);
     }
 
@@ -80,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
+        isDemo = false;
         const file = e.dataTransfer.files[0];
         if (file) handleImage(file);
     });
