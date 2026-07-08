@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         placeholder.style.display = 'none';
         
         preview.src = 'room.png';
+        preview.classList.add('camera-raw');
         preview.style.display = 'block';
         preview.style.opacity = '1';
         
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Set original preview
             preview.src = e.target.result;
+            preview.classList.remove('camera-raw');
             preview.style.display = 'block';
             preview.style.opacity = '1';
             

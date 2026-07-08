@@ -176,6 +176,10 @@ header {
   display: block;
 }
 
+.camera-raw {
+  filter: brightness(0.8) contrast(1.1) sepia(0.2);
+}
+
 .white-aesthetic {
   filter: grayscale(1) brightness(1.6) contrast(0.85) sepia(0.05);
 }
