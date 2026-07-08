@@ -350,8 +350,9 @@ header {
 }
 
 .ml-logo {
-  width: 24px;
   height: 24px;
+  width: auto;
+  max-width: 120px;
 }
 
 .coupon-badge {
