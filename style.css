@@ -1,12 +1,12 @@
 :root {
   --glade-yellow: #f8e71c;
   --glade-yellow-bright: #ffd700;
-  --bg-dark: #ffffff;
-  --bg-darker: #f9f9f9;
-  --text-light: #0a0a0a;
-  --text-dim: #666666;
-  --glass-bg: rgba(0, 0, 0, 0.03);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg-dark: #0a0a0a;
+  --bg-darker: #050505;
+  --text-light: #ffffff;
+  --text-dim: #a0a0a0;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
   --accent-gradient: linear-gradient(135deg, var(--glade-yellow), #f5a623);
   --font-main: 'Outfit', 'Inter', sans-serif;
   --ml-yellow: #FFF159;
@@ -38,7 +38,6 @@ h1, h2, h3 {
   font-weight: 900;
   font-size: 1.5rem;
   color: var(--glade-yellow-bright);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 /* Layout */
@@ -110,7 +109,7 @@ header {
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid var(--glass-border);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +137,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(248, 231, 28, 0.4);
+  box-shadow: 0 0 30px rgba(248, 231, 28, 0.3);
 }
 
 .icon-circle svg {
@@ -218,9 +217,9 @@ header {
   position: absolute;
   width: 130px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.85);
   border-left: 3px solid var(--glade-yellow-bright);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   backdrop-filter: blur(5px);
   font-size: 0.65rem;
   border-radius: 0 8px 8px 0;
@@ -245,7 +244,7 @@ header {
 }
 
 .marker-label {
-  color: #888;
+  color: var(--glade-yellow-bright);
   font-weight: 800;
   display: block;
   margin-bottom: 2px;
@@ -253,7 +252,7 @@ header {
 }
 
 .marker-value {
-  color: #000;
+  color: #fff;
   font-weight: 700;
 }
 
@@ -265,32 +264,34 @@ header {
 }
 
 .hack-card {
-  background: var(--bg-darker);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .hack-card h3 {
   font-size: 0.9rem;
-  color: #000;
+  color: var(--glade-yellow-bright);
   margin-bottom: 0.75rem;
 }
 
 .hack-card p {
   font-size: 1rem;
   line-height: 1.5;
-  color: #333;
+  color: #eee;
 }
 
 .product-recommendation {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  background: var(--bg-darker);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 1.25rem;
   margin-bottom: 1rem;
@@ -300,7 +301,10 @@ header {
   width: 90px;
   height: 90px;
   object-fit: contain;
-  mix-blend-mode: multiply;
+  /* Dark mode visual fix for product white background */
+  background: white;
+  border-radius: 12px;
+  padding: 5px;
 }
 
 .product-info h4 {
@@ -332,13 +336,13 @@ header {
   font-weight: 800;
   font-size: 1rem;
   letter-spacing: 1px;
-  box-shadow: 0 8px 20px rgba(255, 241, 89, 0.3);
+  box-shadow: 0 8px 20px rgba(255, 241, 89, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-buy-ml:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(255, 241, 89, 0.4);
+  box-shadow: 0 12px 25px rgba(255, 241, 89, 0.3);
 }
 
 .ml-logo {
@@ -370,7 +374,7 @@ header {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0.5); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0.4); }
   70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(248, 231, 28, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 231, 28, 0); }
 }
