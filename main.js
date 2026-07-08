@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         placeholder.style.display = 'none';
         
         preview.src = 'room.png';
-        preview.classList.add('camera-raw');
         preview.style.display = 'block';
         preview.style.opacity = '1';
         
